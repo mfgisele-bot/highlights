@@ -9,11 +9,16 @@ const slides = [...carousel.querySelectorAll('.embla__slide')];
 
 function move(direction) {
   const max = viewport.scrollWidth - viewport.clientWidth;
-  const first = slides[0].offsetLeft;
-  const positions = [0, ...slides.map(slide => Math.min(max, slide.offsetLeft - first)), max];
+  const padding = parseFloat(getComputedStyle(viewport).scrollPaddingLeft) || 0;
+  const left = viewport.getBoundingClientRect().left;
+  const positions = slides.map(slide => {
+    const offset = slide.getBoundingClientRect().left - left + viewport.scrollLeft - padding;
+    return Math.max(0, Math.min(max, offset));
+  });
+  positions.push(max);
   const current = viewport.scrollLeft;
   const target = direction > 0
-    ? positions.find(position => position > current + 2) ?? 0
+    ? positions.find(position => position > current + 2) ?? positions[0]
     : positions.findLast(position => position < current - 2) ?? max;
   viewport.scrollTo({ left: target, behavior: reducedMotion.matches ? 'instant' : 'smooth' });
 }
