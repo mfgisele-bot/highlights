@@ -1,0 +1,35 @@
+#features017-7k .embla__viewport {
+  overflow-x: auto;
+  overflow-y: hidden;
+  scrollbar-width: none;
+  scroll-snap-type: x mandatory;
+  scroll-padding-inline: 2rem;
+  cursor: grab;
+}
+#features017-7k .embla__viewport.is-dragging {
+  scroll-snap-type: none;
+  cursor: grabbing;
+}
+#features017-7k .embla__slide {
+  flex: 0 0 auto;
+  margin-inline: 1rem;
+  scroll-snap-align: start;
+}
+#features017-7k .embla__button { display: flex; z-index: 2; }
+#features017-7k .embla__button .mbr-iconfont::before {
+  display: block;
+  content: "";
+  width: .6em;
+  height: .6em;
+  border: solid currentColor;
+  border-width: 0 2px 2px 0;
+  transform: rotate(-45deg);
+}
+#features017-7k .embla__button--prev .mbr-iconfont::before {
+  transform: rotate(135deg);
+}
+@media (max-width: 767px) {
+  #features017-7k .embla__button { top: 32%; width: 44px; height: 44px; }
+  #features017-7k .embla__button--prev { margin-left: .5rem; }
+  #features017-7k .embla__button--next { margin-right: .5rem; }
+}
